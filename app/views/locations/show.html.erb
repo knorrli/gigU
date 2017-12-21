@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1><%= @location %></h1>
+</div>
+
+<ul>
+  <%- @location.events.order(:date).each do |event| %>
+    <li>
+      <%= event %>
+    </li>
+  <% end %>
+</ul>

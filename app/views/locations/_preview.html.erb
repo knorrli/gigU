@@ -1,0 +1,6 @@
+<h3><%= link_to location, location %></h3>
+
+<%= render location.events.order(:date).first(5) %>
+<div class="see-more">
+  <%= link_to "see more...", location %>
+</div>
