@@ -1,4 +1,4 @@
-class BadBonnParser < Parser
+class BadBonnParser < BaseParser
 
   def initialize
     @location = Location.find_by! name: 'Bad Bonn'
@@ -12,6 +12,7 @@ class BadBonnParser < Parser
     date = parse_date node
     event = @location.events.find_or_initialize_by date: date
     event.name = parse_name node
+    event
   end
 
   def parse_date(event_node)

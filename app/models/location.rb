@@ -12,6 +12,8 @@
 class Location < ApplicationRecord
   has_many :events
 
+  validates_uniqueness_of :name
+
   def to_s
     name
   end

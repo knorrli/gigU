@@ -1,15 +1,19 @@
-class BierhuebeliCrawler
-
-  LOCATION_NAME = 'Bierhübeli'
-  EVENT_URL = 'http://www.bierhuebeli.ch/veranstaltungen/'
+class BierhuebeliParser < BaseParser
 
   def initialize
-    @location = Location.find_by! name: LOCATION_NAME
-    @event_url = EVENT_URL
+    @location = Location.find_by! name: 'Bierhübeli'
   end
 
   def event_nodes(content)
     content.css('.bh-event-list.all-events > li')
+  end
+
+  def parse_event_node(node)
+    date = parse_date node
+    event = @location.events.find_or_initialize_by date: date
+    event.name = parse_name(node)
+    event.description = parse_description(node)
+    event
   end
 
   def parse_date(event_node)
@@ -20,6 +24,11 @@ class BierhuebeliCrawler
 
   def parse_name(event_node)
     container = event_node.css '.eventlink'
+    container.text.squish
+  end
+
+  def parse_description(event_node)
+    container = event_node.css '.bh-event-actor'
     container.text.squish
   end
 end

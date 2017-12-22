@@ -1,4 +1,4 @@
-class BonsoirParser < Parser
+class BonsoirParser < BaseParser
 
   def initialize
     @location = Location.find_by! name: 'Bonsoir'
@@ -10,8 +10,9 @@ class BonsoirParser < Parser
 
   def parse_event_node(node)
     date = parse_date node
-    event = @location.find_or_initialize_by date: date
+    event = @location.events.find_or_initialize_by date: date
     event.name = parse_name node
+    event.link = parse_link node
     event
   end
 
@@ -24,5 +25,10 @@ class BonsoirParser < Parser
   def parse_name(event_node)
     name_container = event_node.css '.heading'
     name_container.text.squish
+  end
+
+  def parse_link(event_node)
+    link_node = event_node.css 'a'
+    link_node.first['href']
   end
 end

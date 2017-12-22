@@ -15,6 +15,7 @@ class ISCParser < BaseParser
     event = @location.events.find_or_initialize_by date: date
     event.name = parse_name node
     event.description = parse_description node
+    event
   end
 
   # event_node is a nokogiri node that contains all information about a single

@@ -1,4 +1,4 @@
-class TurnhalleParser < Parser
+class TurnhalleParser < BaseParser
 
   def initialize
     @location = Location.find_by! name: 'Turnhalle'
@@ -13,6 +13,7 @@ class TurnhalleParser < Parser
     event =  @location.events.find_or_initialize(date: date)
     event.name = parse_name(node)
     event.description = parse_description(node)
+    event
   end
 
   def parse_date(event_node)

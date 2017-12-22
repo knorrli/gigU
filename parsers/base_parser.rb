@@ -5,8 +5,11 @@ class BaseParser
     new.parse
   end
 
+  def content
+    Nokogiri::HTML(open(@location.link))
+  end
+
   def parse
-    content = Nokogiri::HTML(open(@location.link))
     event_nodes(content).each do |event_node|
       event = parse_event_node event_node
       event.save
