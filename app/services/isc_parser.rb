@@ -15,6 +15,7 @@ class ISCParser < BaseParser
     event = @location.events.find_or_initialize_by date: date
     event.name = parse_name node
     event.description = parse_description node
+    event.link = parse_link node
     event
   end
 
@@ -37,5 +38,9 @@ class ISCParser < BaseParser
   def parse_description(event_node)
     description_container = event_node.css('.event_title_info')
     description_container.text.squish
+  end
+
+  def parse_link(event_node)
+    event_node['href'].squish
   end
 end

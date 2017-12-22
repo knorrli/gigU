@@ -11,8 +11,9 @@ class BierhuebeliParser < BaseParser
   def parse_event_node(node)
     date = parse_date node
     event = @location.events.find_or_initialize_by date: date
-    event.name = parse_name(node)
-    event.description = parse_description(node)
+    event.name = parse_name node
+    event.description = parse_description node
+    event.link = parse_link node
     event
   end
 
@@ -30,5 +31,10 @@ class BierhuebeliParser < BaseParser
   def parse_description(event_node)
     container = event_node.css '.bh-event-actor'
     container.text.squish
+  end
+
+  def parse_link(event_node)
+    container = event_node.css '.eventlink a'
+    container.first['href']
   end
 end

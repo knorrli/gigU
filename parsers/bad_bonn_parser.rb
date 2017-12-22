@@ -12,6 +12,7 @@ class BadBonnParser < BaseParser
     date = parse_date node
     event = @location.events.find_or_initialize_by date: date
     event.name = parse_name node
+    event.link = parse_link node
     event
   end
 
@@ -21,5 +22,9 @@ class BadBonnParser < BaseParser
 
   def parse_name(event_node)
     event_node.xpath('.//*[attribute::itemprop="name"]').text
+  end
+
+  def parse_link(event_node)
+    event_node.xpath('.//a[attribute::itemprop="url"]/@href').text.squish
   end
 end

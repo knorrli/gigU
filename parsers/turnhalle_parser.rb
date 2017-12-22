@@ -9,10 +9,11 @@ class TurnhalleParser < BaseParser
   end
 
   def parse_event_node(node)
-    date = parse_date(node)
-    event =  @location.events.find_or_initialize(date: date)
-    event.name = parse_name(node)
-    event.description = parse_description(node)
+    date = parse_date node
+    event =  @location.events.find_or_initialize_by date: date
+    event.name = parse_name node
+    event.description = parse_description node
+    event.link = parse_link node
     event
   end
 
@@ -30,5 +31,10 @@ class TurnhalleParser < BaseParser
   def parse_description(event_node)
     description_container = event_node.css 'h3'
     description_container.text.squish
+  end
+
+  def parse_link(event_node)
+    link_container = event_node.css 'a'
+    URI.join(@location.link, link_container.first['href'])
   end
 end
