@@ -6,6 +6,7 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  link       :string
 #
 
 class Location < ApplicationRecord
@@ -14,4 +15,5 @@ class Location < ApplicationRecord
   def to_s
     name
   end
+
 end

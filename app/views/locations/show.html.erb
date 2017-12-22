@@ -2,10 +2,17 @@
   <h1><%= @location %></h1>
 </div>
 
-<ul>
-  <%- @location.events.order(:date).each do |event| %>
-    <li>
-      <%= event %>
-    </li>
-  <% end %>
-</ul>
+<% @location.events.each do |event| %>
+  <div class="event">
+    <div class="col-md-2">
+      <h3 class="pull-right">
+        <small><%= event.date %></small>
+      </h3>
+    </div>
+    <div class="col-md-10">
+      <h3>
+        <%= event.name %>
+      </h3>
+    </div>
+  </div>
+<% end %>

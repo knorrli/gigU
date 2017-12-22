@@ -8,6 +8,8 @@
 #  location_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  description :string
+#  link        :string
 #
 
 require 'test_helper'

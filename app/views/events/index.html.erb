@@ -7,7 +7,7 @@
   <div class="date-events">
     <% date_events.each do |event| %>
       <div class="event">
-        <strong><%= event.location %>:</strong>
+        <strong><%= link_to event.location, event.location %>:</strong>
         <%= event.name %>
       </div>
     <% end %>

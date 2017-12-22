@@ -15,7 +15,7 @@ module Eventlog
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # autoload services
-    config.autoload_paths << "#{Rails.root}/services"
+    # autoload parsers
+    config.autoload_paths << "#{Rails.root}/parsers"
   end
 end

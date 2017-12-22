@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.order(:date)
+    @events = Event.upcoming
   end
 end

@@ -1,0 +1,9 @@
+Description:
+    The CrawlerGenerator can be used to generate new crawlers for other
+    locations.
+
+Example:
+    rails generate crawler Thing
+
+    This will create:
+        A file services/thing_crawler.rb
