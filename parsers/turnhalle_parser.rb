@@ -1,4 +1,4 @@
-class TurnhalleCrawler < Crawler
+class TurnhalleParser < Parser
 
   def initialize
     @location = Location.find_by! name: 'Turnhalle'

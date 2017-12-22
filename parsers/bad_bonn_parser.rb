@@ -1,4 +1,4 @@
-class BadBonnParser
+class BadBonnParser < Parser
 
   def initialize
     @location = Location.find_by! name: 'Bad Bonn'

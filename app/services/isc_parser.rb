@@ -1,4 +1,4 @@
-class ISCCrawler < Crawler
+class ISCParser < Parser
 
   def initialize
     @location = Location.find_by! name: 'ISC'

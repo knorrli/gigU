@@ -1,4 +1,4 @@
-class BonsoirCrawler
+class BonsoirParser < Parser
 
   def initialize
     @location = Location.find_by! name: 'Bonsoir'
