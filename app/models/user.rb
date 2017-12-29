@@ -14,6 +14,11 @@
 class User < ApplicationRecord
   include Clearance::User
 
-  has_many :location_interests
-  has_many :locations, through: :location_interests
+  has_one :profile
+
+  after_create :create_profile
+
+  def create_profile
+    Profile.create(user: self)
+  end
 end

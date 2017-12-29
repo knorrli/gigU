@@ -27,7 +27,7 @@ class #{file_name.camelize}Parser < BaseParser
     name = parse_name event_node
     event = @location.events.find_or_initialize_by date: date, name: name
     # event.description =
-    # event.link =
+    # event.url =
     event
   end
 

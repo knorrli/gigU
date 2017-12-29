@@ -6,7 +6,11 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  link       :string
+#  events_url :string
+#  street     :string
+#  zip        :string
+#  city       :string
+#  region     :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

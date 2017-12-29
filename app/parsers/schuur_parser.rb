@@ -13,7 +13,7 @@ class SchuurParser < BaseParser
     name = parse_name event_node
     event = @location.events.find_or_initialize_by date: date, name: name
     event.description = event_node.css('.event-facts-summary').text.squish
-    event.link = event_node.css('.event-sharing-link').first['data']
+    event.url = event_node.css('.event-sharing-link').first['data']
     event
   end
 

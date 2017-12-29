@@ -6,7 +6,11 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  link       :string
+#  events_url :string
+#  street     :string
+#  zip        :string
+#  city       :string
+#  region     :string
 #
 
 class Location < ApplicationRecord

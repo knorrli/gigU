@@ -15,7 +15,7 @@ class ISCParser < BaseParser
     name = parse_name node
     event = @location.events.find_or_initialize_by date: date, name: name
     event.description = parse_description node
-    event.link = parse_link node
+    event.url = parse_link node
     event
   end
 
