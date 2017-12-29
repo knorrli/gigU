@@ -2,6 +2,6 @@
   <h1>Locations</h1>
 </div>
 
-<% @locations.each do |location| %>
+<% @locations.order(:name).each do |location| %>
   <%= render 'preview', location: location %>
 <% end %>

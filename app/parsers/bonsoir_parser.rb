@@ -10,8 +10,8 @@ class BonsoirParser < BaseParser
 
   def parse_event_node(node)
     date = parse_date node
-    event = @location.events.find_or_initialize_by date: date
-    event.name = parse_name node
+    name = parse_name node
+    event = @location.events.find_or_initialize_by date: date, name: name
     event.link = parse_link node
     event
   end

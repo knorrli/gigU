@@ -10,8 +10,8 @@ class TurnhalleParser < BaseParser
 
   def parse_event_node(node)
     date = parse_date node
-    event =  @location.events.find_or_initialize_by date: date
-    event.name = parse_name node
+    name = parse_name node
+    event =  @location.events.find_or_initialize_by date: date, name: name
     event.description = parse_description node
     event.link = parse_link node
     event

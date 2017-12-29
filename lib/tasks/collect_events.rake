@@ -1,6 +1,6 @@
-
 namespace :event_collector  do
-  desc "create some fake data"
+
+  desc "Collect the events from all registered Locations via their parsers"
   task :run => :environment do
     EventCollector.run
   end

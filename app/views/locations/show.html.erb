@@ -1,18 +1,19 @@
 <div class="page-header">
-  <h1><%= @location %></h1>
+  <h1>
+    <%= @location %>
+    <small><%= link_to @location.link, @location.link, target: :blank %></small>
+  </h1>
 </div>
 
-<% @location.events.each do |event| %>
-  <div class="event">
-    <div class="col-md-2">
-      <h3 class="pull-right">
-        <small><%= event.date %></small>
-      </h3>
+<div class="events">
+  <% @location.events.upcoming.group_by(&:date).each do |date, date_events| %>
+    <div class="col-md-12">
+      <h3><%= date.strftime('%d.%m.%Y') %></h3>
     </div>
-    <div class="col-md-10">
-      <h3>
-        <%= event.name %>
-      </h3>
-    </div>
-  </div>
-<% end %>
+    <% date_events.each do |event| %>
+      <div class="col-xs-10">
+        <h4><%= link_to event, event.link, target: :_blank %></h4>
+      </div>
+    <% end %>
+  <% end %>
+</div>

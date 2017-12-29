@@ -23,6 +23,6 @@ class Event < ApplicationRecord
   end
 
   def to_s
-    "#{date}: #{name}"
+    "#{name}"
   end
 end

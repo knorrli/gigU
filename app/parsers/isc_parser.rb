@@ -12,8 +12,8 @@ class ISCParser < BaseParser
 
   def parse_event_node(node)
     date = parse_date node
-    event = @location.events.find_or_initialize_by date: date
-    event.name = parse_name node
+    name = parse_name node
+    event = @location.events.find_or_initialize_by date: date, name: name
     event.description = parse_description node
     event.link = parse_link node
     event
@@ -25,7 +25,12 @@ class ISCParser < BaseParser
   def parse_date(event_node)
     date_container = event_node.css('.event_title_date')
     day, month = date_container.text.match(/^.*(\d{2}).*(\d{2}).*$/).captures.map(&:to_i)
-    Date.new Date.today.year, month, day
+    Date.new year_for(month), month, day
+  end
+
+  def year_for(month)
+    today = Date.today
+    month < today.month ? (today.year + 1) : (today.year)
   end
 
   # event_node is a nokogiri node that contains all information about a single
