@@ -19,7 +19,12 @@ class BonsoirParser < BaseParser
   def parse_date(event_node)
     date_container = event_node.css('.firstcol')
     day, month = date_container.text.match(/^.*(\d{2}).*(\d{2}).*$/).captures.map(&:to_i)
-    Date.new Date.today.year, month, day
+    Date.new year_for(month), month, day
+  end
+
+  def year_for(month)
+    today = Date.today
+    month < today.month ? (today.year + 1) : (today.year)
   end
 
   def parse_name(event_node)

@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 ###########################
 # CUSTOM
 
+# PRY
+gem 'pry-rails'
+
 # webscraping/XPath parsing
 gem 'nokogiri', '~> 1.8', '>= 1.8.1'
 

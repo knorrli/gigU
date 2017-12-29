@@ -13,4 +13,7 @@
 
 class User < ApplicationRecord
   include Clearance::User
+
+  has_many :location_interests
+  has_many :locations, through: :location_interests
 end

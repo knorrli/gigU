@@ -2,28 +2,18 @@
   <h1>all Events by Date</h1>
 </div>
 
-<table class="table">
+<div class="events">
   <%- @events.all.group_by(&:date).each do |date, date_events| %>
-    <tr class="row">
-      <td class="cell">
-        <h3><%= date %></h3>
-      </td>
-    </tr>
+    <div class="col-md-12">
+      <h3><%= date.strftime('%d.%m.%Y') %></h3>
+    </div>
     <% date_events.each do |event| %>
-      <tr class="row">
-        <td class="cell">
-          <h3>
-            <small>
-              <%= event.location %>
-            </small>
-          </h3>
-        </td>
-        <td class="cell">
-          <h3>
-            <%= link_to event, event.link, target: :_blank %>
-          </h3>
-        </td>
-      </tr>
+      <div class="col-xs-2">
+        <%= event.location %>
+      </div>
+      <div class="col-xs-10">
+        <h4><%= link_to event, event.link, target: :_blank %></h4>
+      </div>
     <% end %>
   <% end %>
-</table>
+</div>

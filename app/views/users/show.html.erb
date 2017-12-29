@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Your Profile</h1>
+</div>
+
+<%= form_for @user do %>
+  <ul class="list">
+    <% Location.all.each do |location| %>
+      <li>
+        <%= check_box_tag "user[#{location}]", true, checked: @user.locations.include?(location) %>
+        <%= label_tag "user[#{location}]", location %>
+      </li>
+    <% end %>
+  </ul>
+  <%= submit_tag :save %>
+<% end %>
