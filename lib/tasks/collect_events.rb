@@ -1,7 +1,7 @@
 
-namespace :collector  do
+namespace :event_collector  do
   desc "create some fake data"
-  task :collect_info => :environment do
-    Collector.collect_info
+  task :run => :environment do
+    EventCollector.run
   end
 end
