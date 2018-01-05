@@ -14,11 +14,17 @@
 #
 
 class Location < ApplicationRecord
+  belongs_to :city
+  belongs_to :region
+
   has_many :events
+
   has_many :location_interests
-  has_many :users, through: :location_interests
+  has_many :profiles, through: :location_interests
 
   validates_uniqueness_of :name
+
+  default_scope { order(:name) }
 
   def to_s
     name

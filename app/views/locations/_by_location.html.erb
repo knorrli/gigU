@@ -1,0 +1,27 @@
+<div class="events">
+  <% locations.each do |location| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong><%= link_to location, location %></strong>
+      </div>
+      <ul class="list-group">
+        <% location.events.upcoming.limit(3).each do |event| %>
+          <li class="list-group-item event">
+            <div class="row">
+              <div class="col-xs-1">
+                <%= interest_button(event) %>
+              </div>
+              <div class="col-xs-3">
+                <%= event.date.strftime('%d.%m.%Y') %>
+              </div>
+              <div class="col-xs-8">
+                <%= link_to event, event %>
+              </div>
+            </div>
+          </li>
+
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

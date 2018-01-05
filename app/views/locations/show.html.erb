@@ -1,19 +1,33 @@
 <div class="page-header">
-  <h1>
-    <%= @location %>
-    <small><%= link_to @location.link, @location.link, target: :blank %></small>
-  </h1>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>
+        <%= @location %>
+      </h1>
+    </div>
+  </div>
 </div>
 
-<div class="events">
-  <% @location.events.upcoming.group_by(&:date).each do |date, date_events| %>
-    <div class="col-md-12">
-      <h3><%= date.strftime('%d.%m.%Y') %></h3>
-    </div>
-    <% date_events.each do |event| %>
-      <div class="col-xs-10">
-        <h4><%= link_to event, event.url, target: :_blank %></h4>
+<div class="row">
+  <div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li>
+        <%= link_to @location.events_url, class: 'btn-link', target: :blank do %>
+          <span class="glyphicon glyphicon-globe"></span>
+          Website
+        <% end %>
+      </li>
+      <li><%= link_to "About #{@location}", '#about', data: { toggle: 'tab' } %></li>
+      <li class="active"><%= link_to "Events", '#by-date', data: { toggle: 'tab' } %></li>
+    </ul>
+  </div>
+  <div class="col-md-10">
+    <div class="tab-content">
+      <div class="tab-pane active" id='by-date'>
+        <%= render 'by_date', events: @location.events %>
       </div>
-    <% end %>
-  <% end %>
+      <div class="tab-pane" id='about'>
+      </div>
+    </div>
+  </div>
 </div>

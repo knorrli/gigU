@@ -1,0 +1,26 @@
+<div class="events">
+  <% events.group_by(&:date).each do |date, date_events| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong><%= date.strftime('%d.%m.%Y') %></strong>
+      </div>
+      <ul class="list-group">
+        <% date_events.each do |event| %>
+          <li class="list-group-item event">
+            <div class="row">
+              <div class="col-xs-1">
+                <%= interest_button(event) %>
+              </div>
+              <div class="col-xs-3">
+                <%= link_to "#{event.location}, #{event.city}", event.location %>
+              </div>
+              <div class="col-xs-8">
+                <%= link_to event, event %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

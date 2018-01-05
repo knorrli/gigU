@@ -41,6 +41,17 @@ class #{file_name.camelize}Parser < BaseParser
   def parse_date(event_node)
     raise "IMPLEMENT"
   end
+
+  # parse_name must return the name of the event contained in the given
+  # event_node.
+  # In most cases, the name information can be extracted with an xpath/css
+  # selector.
+  #
+  # example:
+  #   event_node.css('.event.name').text.squish
+  def parse_name(event_node)
+    raise "IMPLEMENT"
+  end
 end
     FILE
   end

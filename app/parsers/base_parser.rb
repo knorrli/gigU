@@ -1,4 +1,6 @@
 require 'open-uri'
+require 'chronic'
+
 class BaseParser
 
   def self.parse
@@ -10,7 +12,7 @@ class BaseParser
   end
 
   def content
-    Nokogiri::HTML(open(@location.link))
+    Nokogiri::HTML(open(@location.events_url))
   end
 
   def parse

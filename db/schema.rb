@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229083642) do
+ActiveRecord::Schema.define(version: 20180104141448) do
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.integer "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_cities_on_region_id"
+  end
+
+  create_table "city_interests", force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_city_interests_on_city_id"
+    t.index ["profile_id"], name: "index_city_interests_on_profile_id"
+  end
+
+  create_table "event_interests", force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_interests_on_event_id"
+    t.index ["profile_id"], name: "index_event_interests_on_profile_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.date "date"
@@ -39,8 +65,8 @@ ActiveRecord::Schema.define(version: 20171229083642) do
     t.string "events_url"
     t.string "street"
     t.string "zip"
-    t.string "city"
-    t.string "region"
+    t.integer "region_id"
+    t.integer "city_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -48,6 +74,21 @@ ActiveRecord::Schema.define(version: 20171229083642) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "region_interests", force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_region_interests_on_profile_id"
+    t.index ["region_id"], name: "index_region_interests_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

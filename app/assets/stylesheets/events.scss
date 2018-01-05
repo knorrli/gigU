@@ -1,3 +1,101 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.interest-link {
+  & .glyphicon:after {
+    font-family: "Glyphicons Halflings";
+    content:"\e143";
+  }
+
+  &:hover, &:active, &:focus {
+    color: red;
+  }
+
+  &.interested {
+    color: red;
+
+    & .glyphicon:after {
+      font-family: "Glyphicons Halflings";
+      content:"\e005";
+    }
+  }
+
+}
+
+.quickfilter-modal {
+  .modal-body {
+    min-height: 500px;
+  }
+}
+
+.filters {
+  margin-top: 25px;
+
+  .btn-group {
+    margin-left: 15px;
+
+    .glyphicon {
+      top: 2px;
+    }
+
+  }
+
+  .panel-body {
+    padding: 0;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+  }
+
+  .list-group-item {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+
+.submit-filter-interested .glyphicon {
+  color: red;
+}
+
+.filter-checkbox {
+  display: none;
+}
+
+.filter-label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.filter-checkbox {
+
+  & ~ .filter-label {
+    & .glyphicon:after {
+      color: $brand-success;
+      font-family: "Glyphicons Halflings";
+      content:"\e089";
+    }
+  }
+
+  &:checked {
+    & ~ .filter-label {
+      color: $gray-light;
+
+      & .glyphicon:after {
+        color: $gray;
+        font-family: "Glyphicons Halflings";
+        content:"\e090";
+      }
+    }
+  }
+}
+
+.quickfilter-modal {
+  .panel-body {
+    overflow-y: scroll;
+    max-height: 400px;
+  }
+}

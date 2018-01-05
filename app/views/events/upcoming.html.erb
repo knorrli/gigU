@@ -1,0 +1,83 @@
+<div class="page-header">
+  <h1>
+    Upcoming Events
+    <%= link_to "Filter", '#', class: 'btn btn-default', data: { toggle: 'modal', target: '#filter' } %>
+  </h1>
+</div>
+
+<%= render 'by_date', events: @events %>
+
+<div class="modal" id="filter">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% filter_hash = params[:f] %>
+      <% location_ids = filter_hash.try(:[], :l_ids) || Location.pluck(:id).map(&:to_s) %>
+      <% city_ids = filter_hash.try(:[], :c_ids) || City.pluck(:id).map(&:to_s) %>
+      <% region_ids = filter_hash.try(:[], :r_ids) || Region.pluck(:id).map(&:to_s) %>
+      <%= form_tag events_path, method: :get do %>
+        <div class="modal-header">
+          <h3>Filter</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-4">
+              <ul role="tablist" class="nav nav-pills nav-stacked">
+                <li class="active">
+                  <%= link_to '#filter-location', data: { toggle: 'pill' } do %>
+                    Locations
+                    <span class="badge pull-right"><%= "#{location_ids.count}/#{Location.count}" %></span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to '#filter-city', data: { toggle: 'pill' } do %>
+                    Cities
+                    <span class="badge pull-right"><%= "#{city_ids.count}/#{City.count}" %></span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to '#filter-region', data: { toggle: 'pill' } do %>
+                    Regions
+                    <span class="badge pull-right"><%= "#{region_ids.count}/#{Region.count}" %></span>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-8 tab-content">
+              <div class="tab-pane active" id="filter-location">
+                <% Location.all.each do |location| %>
+                  <div>
+                    <%= check_box_tag "f[l_ids][]", location.id, location_ids.include?(location.id.to_s), id: "filter_location_#{location.id}" %>
+                    <%= label_tag "filter_location_#{location.id}", location %>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="tab-pane" id="filter-city">
+                <% City.all.each do |city| %>
+                  <div>
+                    <%= check_box_tag "f[c_ids][]", city.id, city_ids.include?(city.id.to_s), id: "filter_city_#{city.id}" %>
+                    <%= label_tag "filter_city_#{city.id}", city %>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="tab-pane" id="filter-region">
+                <% Region.all.each do |region| %>
+                  <div>
+                    <%= check_box_tag "f[r_ids][]", region.id, region_ids.include?(region.id.to_s), id: "filter_region_#{region.id}" %>
+                    <%= label_tag "filter_region_#{region.id}", region %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <%= submit_tag "Apply Filter", class: 'btn btn-default' %>
+          <%= link_to "Reset Filter", events_path, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

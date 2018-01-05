@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #
-  root 'locations#index'
 
-  resources :locations
-  resources :events
+  mount API => '/api'
+  mount GrapeSwaggerRails::Engine => '/api/docs'
 
-  resources :users
+  root 'events#index'
+
+  get :profile, to: 'profile#show'
+  patch :profile, to: 'profile#update'
+
+  resources :event_interests, path: '/my_events', only: [:index, :create, :destroy]
+  resources :events, only: [:index, :show] do
+    collection do
+      get :toggle_customized_filter
+      get :toggle_interested_filter
+      get :toggle_location_filter
+      get :clear_quickfilter
+    end
+  end
+  resources :locations, only: [:index, :show]
+
+
 end

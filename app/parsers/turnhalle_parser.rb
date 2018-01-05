@@ -35,6 +35,6 @@ class TurnhalleParser < BaseParser
 
   def parse_link(event_node)
     link_container = event_node.css 'a'
-    URI.join(@location.link, link_container.first['href'])
+    URI.join(@location.events_url, link_container.first['href'])
   end
 end

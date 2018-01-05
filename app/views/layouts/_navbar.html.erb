@@ -15,13 +15,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'All Locations', :locations %></li>
-        <li><%= link_to 'All Events', :events %></li>
+        <% if signed_in? %>
+          <li><%= link_to 'My Calendar', event_interests_path %></li>
+        <% end %>
+        <li><%= link_to 'Events', events_path %></li>
+        <li><%= link_to 'Locations', locations_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
-          <li><%= link_to current_user.email, current_user %></li>
-          <li><%= link_to 'Sign out', sign_out_path, method: :delete %></li>
+          <li><%= link_to current_user.email, profile_path(current_user.profile.id) %></li>
       <% else %>
         <li><%= link_to 'Sign in', sign_in_path %></li>
       <% end %>

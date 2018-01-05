@@ -1,0 +1,13 @@
+<li class="list-group-item event">
+  <div class="row">
+    <div class="col-xs-1">
+      <%= interest_button(event, :date) %>
+    </div>
+    <div class="col-xs-3">
+      <%= link_to "#{event.location}, #{event.city}", event.location %>
+    </div>
+    <div class="col-xs-8">
+      <%= link_to event, event %>
+    </div>
+  </div>
+</li>
