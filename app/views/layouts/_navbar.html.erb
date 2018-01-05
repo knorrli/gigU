@@ -23,7 +23,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
-          <li><%= link_to current_user.email, profile_path(current_user.profile.id) %></li>
+          <li><%= link_to current_user.email, current_profile %></li>
       <% else %>
         <li><%= link_to 'Sign in', sign_in_path %></li>
       <% end %>

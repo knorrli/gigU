@@ -1,9 +1,6 @@
 <div class="page-header">
   <h1>
-    My Interests
-    <div class="pull-right">
-      <%= link_to "Organize Interests", current_profile, class: 'btn btn-default' %>
-    </div>
+    My Calendar
   </h1>
 </div>
 
@@ -17,10 +14,10 @@
   <div class="col-md-10">
     <div class="tab-content">
       <div class="tab-pane active" id='by-date'>
-        <%= render 'events/by_date', events: @events %>
+        <%= render 'by_date', events: @events %>
       </div>
       <div class="tab-pane" id='by-location'>
-        <%= render 'events/by_location', events: @events %>
+        <%= render 'by_location', events: @events %>
       </div>
     </div>
   </div>

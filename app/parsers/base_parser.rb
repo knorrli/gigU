@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'chronic'
+require 'html2text'
 
 class BaseParser
 
@@ -20,6 +20,10 @@ class BaseParser
       event = parse_event_node event_node
       event.save
     end
+  end
+
+  def html_to_string(html)
+    Html2Text.convert(html)
   end
 
   def name

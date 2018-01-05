@@ -4,12 +4,17 @@
 #
 #  id          :integer          not null, primary key
 #  date        :date
-#  name        :string
+#  title       :string
 #  location_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  description :string
 #  url         :string
+#  starts_at   :datetime
+#  ends_at     :datetime
+#  admission   :string
+#  extras      :text
+#  doors       :datetime
 #
 
 class Event < ApplicationRecord
@@ -64,6 +69,6 @@ class Event < ApplicationRecord
   end
 
   def to_s
-    "#{name}"
+    "#{title}"
   end
 end

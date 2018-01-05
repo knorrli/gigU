@@ -1,10 +1,37 @@
 <div class="page-header">
-  <h1>Events by Location</h1>
+  <h1>Locations</h1>
 </div>
 
-<div class="col-md-2">
+<% first_region = Region.first %>
+<div class="row">
+  <div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+      <% Region.all.each do |region| %>
+        <li class=<%= (region == first_region ? "active" : "") %>><%= link_to "#{region}", "#region-#{region.id}", data: { toggle: "tab" } %></li>
+      <% end %>
+    </ul>
+  </div>
 
-</div>
-<div class="col-md-10">
-  <%= render 'by_location', locations: @locations %>
+  <div class="col-md-10">
+    <div class="tab-content">
+      <% Region.all.each do |region| %>
+        <div class="tab-pane <%= (region == first_region ? 'active' : '') %>" id="region-<%= region.id %>">
+          <% region.cities.each do |city| %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong><%= city %></strong>
+              </div>
+              <div class="list-group filter-list">
+                <% city.locations.each do |location| %>
+                  <div class="list-group-item">
+                    <%= link_to location, location %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

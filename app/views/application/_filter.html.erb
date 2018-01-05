@@ -1,11 +1,11 @@
-<div class="filters row">
-  <% filter_hash = params[:f] %>
-  <% location_ids = filter_hash.try(:[], :l_ids) || [] %>
-  <% city_ids = filter_hash.try(:[], :c_ids) || [] %>
-  <% region_ids = filter_hash.try(:[], :r_ids) || [] %>
-  <% filter_interested = filter_hash.try(:[], :i) %>
-  <% filter_customized = filter_hash.try(:[], :c) %>
-  <%= form_tag events_path, method: :get, id: :filter_form do %>
+<%= form_tag events_path, method: :get, id: :filter_form do %>
+  <div class="filter row">
+    <% filter_hash = params[:f] %>
+    <% location_ids = filter_hash.try(:[], :l_ids) || [] %>
+    <% city_ids = filter_hash.try(:[], :c_ids) || [] %>
+    <% region_ids = filter_hash.try(:[], :r_ids) || [] %>
+    <% filter_interested = filter_hash.try(:[], :i) %>
+    <% filter_customized = filter_hash.try(:[], :c) %>
     <div class="col-md-1">
       <h4>Filters:</h4>
     </div>
@@ -50,10 +50,7 @@
     </div>
 
     <div class="col-md-4">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control search-events">
-        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-      </div>
+      <%= render 'search' %>
     </div>
 
     <div class="modal quickfilter-modal bs-example-modal-lg" tabindex="-1" id="quickfilter">
@@ -111,7 +108,7 @@
                           <%= label_tag "filter_city_#{city.id}", class: 'filter-label', form: :filter_form do %>
                             <span class="glyphicon"></span>
                             <%= city %>
-                            <% end %>
+                          <% end %>
                         </div>
                       <% end %>
                     </div>
@@ -132,7 +129,7 @@
                           <%= label_tag "filter_region_#{region.id}", class: 'filter-label', form: :filter_form do %>
                             <span class="glyphicon"></span>
                             <%= region %>
-                            <% end %>
+                          <% end %>
                         </div>
                       <% end %>
                     </div>
@@ -148,5 +145,5 @@
         </div>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

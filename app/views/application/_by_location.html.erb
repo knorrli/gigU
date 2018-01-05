@@ -1,11 +1,11 @@
 <div class="events">
-  <% locations.each do |location| %>
+  <% events.upcoming.group_by(&:location).each do |location, location_events| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong><%= link_to location, location %></strong>
       </div>
       <ul class="list-group">
-        <% location.events.upcoming.limit(3).each do |event| %>
+        <% location_events.each do |event| %>
           <li class="list-group-item event">
             <div class="row">
               <div class="col-xs-1">
@@ -19,7 +19,6 @@
               </div>
             </div>
           </li>
-
         <% end %>
       </ul>
     </div>

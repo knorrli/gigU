@@ -1,6 +1,6 @@
 module Entities
   class Location < Grape::Entity
-    expose :name
+    expose :title
     expose :events_url
     expose :street
     expose :zip

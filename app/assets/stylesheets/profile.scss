@@ -1,3 +1,27 @@
-// Place all the styles related to the profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.profile {
+
+  .filter-checkbox {
+    & ~ .filter-label {
+      color: $gray-light;
+
+      & .glyphicon:after {
+        color: $gray;
+        font-family: "Glyphicons Halflings";
+        content:"\e090";
+      }
+    }
+
+
+    &:checked {
+      & ~ .filter-label {
+        color: $gray-dark;
+
+        & .glyphicon:after {
+          color: $brand-success;
+          font-family: "Glyphicons Halflings";
+          content:"\e089";
+        }
+      }
+    }
+  }
+}

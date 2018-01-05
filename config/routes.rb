@@ -6,8 +6,7 @@ Rails.application.routes.draw do
 
   root 'events#index'
 
-  get :profile, to: 'profile#show'
-  patch :profile, to: 'profile#update'
+  resources :profiles, only: [:show, :update]
 
   resources :event_interests, path: '/my_events', only: [:index, :create, :destroy]
   resources :events, only: [:index, :show] do

@@ -9,8 +9,8 @@
 #  events_url :string
 #  street     :string
 #  zip        :string
-#  city       :string
-#  region     :string
+#  region_id  :integer
+#  city_id    :integer
 #
 
 class Location < ApplicationRecord

@@ -1,0 +1,42 @@
+
+.filter {
+  margin-top: 25px;
+
+  .submit-filter-interested .glyphicon {
+    color: red;
+  }
+
+  .btn-group {
+    margin-left: 15px;
+
+    .glyphicon {
+      top: 2px;
+    }
+  }
+
+  .panel-body {
+    padding: 0;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+  }
+
+  .list-group-item {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .quickfilter-modal {
+    .modal-body {
+      min-height: 500px;
+    }
+
+    .panel-body {
+      overflow-y: scroll;
+      max-height: 400px;
+    }
+  }
+}
+
+

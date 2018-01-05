@@ -42,6 +42,9 @@ gem 'pry-rails'
 # webscraping/XPath parsing
 gem 'nokogiri', '~> 1.8', '>= 1.8.1'
 
+# text parsing
+gem 'html2text', '~> 0.2.0'
+
 # user authentication
 gem 'clearance', '~> 1.16', '>= 1.16.1'
 

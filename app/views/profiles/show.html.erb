@@ -1,0 +1,55 @@
+<div class="profile">
+  <div class="page-header">
+    <h3>
+      Your Profile
+      <div class="pull-right">
+        <%= link_to "Change Password", edit_user_password_path(user_id: current_user.id), class: 'btn btn-default' %>
+        <%= link_to "Sign Out", sign_out_path, method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </h3>
+  </div>
+  <%= form_for @profile do |f| %>
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+          <li class='active'><%= link_to "Custom Filter", "#custom-filter", data: { toggle: "tab", target: "#custom-filter" }%></li>
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+        <div class="tab-content">
+          <div class="tab-pane active" id="custom-filter">
+            <% Region.all.each do |region| %>
+              <div class="region-container">
+                <% region.cities.order(:name).each do |city| %>
+                  <div class="panel panel-default panel-city">
+                    <div class="panel-heading">
+                      <strong><%= "#{city}, Region #{region}" %></strong>
+                      <%= link_to 'Toggle All', '#', class: 'btn btn-default btn-xs toggle-city', data: { turbolinks: false } %>
+                    </div>
+                    <div class="list-group filter-list">
+                      <% city.locations.each do |location| %>
+                        <%= f.fields_for :location_interests do |ff| %>
+                          <% location_id = location.id %>
+                          <% id = "location_interest_for_#{location_id}" %>
+                          <div class="list-group-item">
+                            <%= ff.check_box location_id, checked: @profile.location_ids.include?(location_id), class: 'filter-checkbox' %>
+                            <%= ff.label location_id, class: 'filter-label' do %>
+                              <span class="glyphicon"></span>
+                              <%= "#{location}, #{city}" %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= f.submit :save, class: 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
