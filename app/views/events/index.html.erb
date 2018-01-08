@@ -1,3 +1,6 @@
+<% filter_hash = params[:f] %>
+<% location_ids = filter_hash.try(:[], :l_ids) || [] %>
+
 <div class="page-header">
   <div class="row">
     <div class="col-md-2">
@@ -5,19 +8,52 @@
         Events
       </div>
     </div>
-    <div class="col-md-10">
-      <%= render 'filter' %>
+    <div class="col-md-7">
+      <%= render 'custom_filters' %>
+    </div>
+
+    <div class="col-md-3">
+      <%= render 'search' %>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-2">
-    <ul class="nav nav-pills nav-stacked">
-      <li class="active"><%= link_to "By Date", '#by-date', data: { toggle: 'tab' } %></li>
-      <li><%= link_to "By Location", '#by-location', data: { toggle: 'tab' } %></li>
-    </ul>
+  <div class="filter col-md-2">
+    <%= form_tag events_path, method: :get, id: :filter_form do %>
+    <div class="form-group has-feedback">
+      <input type="text" class="form-control search-filter" placeholder="Quickfilter">
+      <span class="glyphicon glyphicon-search form-control-feedback"></span>
+    </div>
+    <% City.all.each do |city| %>
+      <% locations = city.locations %>
+      <div class="panel panel-default panel-city">
+        <div class="panel-heading">
+          <%= link_to '#', class: 'toggle-city', data: { turbolinks: false } do %>
+            <% glyph = (locations.pluck(:id).map(&:to_s) - location_ids).empty? ? 'all-checked' : 'not-all-checked' %>
+            <span class="glyphicon <%= glyph %>"></span>
+            <strong><%= city %></strong>
+          <% end %>
+        </div>
+        <div class="list-group filter-list">
+          <% locations.each do |location| %>
+            <% checked = location_ids.include?(location.id.to_s) %>
+            <div class="list-group-item search-filter-item">
+              <%= check_box_tag "f[l_ids][]", location.id, checked, class: 'filter-checkbox', id: "filter_location_#{location.id}" %>
+              <%= label_tag "filter_location_#{location.id}", class: 'filter-label' do %>
+                <span class="glyphicon"></span>
+                <%= location %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= submit_tag 'Filter', class: 'btn btn-default' %>
+    <%= submit_tag 'Reset', class: 'btn btn-danger pull-right', formaction: clear_quickfilter_events_path %>
+  <% end %>
   </div>
+
   <div class="col-md-10">
     <div class="tab-content">
       <div class="tab-pane active" id='by-date'>

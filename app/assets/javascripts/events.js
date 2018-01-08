@@ -1,6 +1,7 @@
 $(function() {
   $(document).on('turbolinks:load', function() {
-    $(".events").find('.interest-link').on('ajax:success', updateViewstate)
+    $(document).off('ajax:success', updateViewstate)
+    $(document).on('ajax:success', '.interest-link', updateViewstate)
   })
 
   var updateViewstate = function(event) {

@@ -22,10 +22,15 @@
             <% Region.all.each do |region| %>
               <div class="region-container">
                 <% region.cities.order(:name).each do |city| %>
+                  <% location_ids = @profile.locations.where(city: city).pluck(:id) %>
+                  <% locations = city.locations %>
                   <div class="panel panel-default panel-city">
                     <div class="panel-heading">
-                      <strong><%= "#{city}, Region #{region}" %></strong>
-                      <%= link_to 'Toggle All', '#', class: 'btn btn-default btn-xs toggle-city', data: { turbolinks: false } %>
+                      <%= link_to '#', class: 'toggle-city', data: { turbolinks: false } do %>
+                        <% glyph = (location_ids.count == locations.count) ? 'all-checked' : 'not-all-checked' %>
+                        <span class="glyphicon <%= glyph %>"></span>
+                        <strong><%= "#{city}, Region #{region}" %></strong>
+                      <% end %>
                     </div>
                     <div class="list-group filter-list">
                       <% city.locations.each do |location| %>

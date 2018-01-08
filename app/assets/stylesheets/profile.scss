@@ -1,13 +1,29 @@
 .profile {
 
+  .glyphicon {
+    &.all-checked:after {
+      color: $color-filtered-green;
+      content:"\e105";
+      font-family: "Glyphicons Halflings";
+    }
+
+    &.not-all-checked:after {
+      color: $color-filtered-red;
+      content:"\e106";
+      font-family: "Glyphicons Halflings";
+    }
+  }
+
+
+
   .filter-checkbox {
     & ~ .filter-label {
       color: $gray-light;
 
       & .glyphicon:after {
-        color: $gray;
+        color: $color-filtered-red;
         font-family: "Glyphicons Halflings";
-        content:"\e090";
+        content:"\e106";
       }
     }
 
@@ -17,9 +33,9 @@
         color: $gray-dark;
 
         & .glyphicon:after {
-          color: $brand-success;
+          color: $color-filtered-green;
           font-family: "Glyphicons Halflings";
-          content:"\e089";
+          content:"\e105";
         }
       }
     }

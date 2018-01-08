@@ -1,0 +1,143 @@
+<%= form_tag events_path, method: :get, id: :filter_form do %>
+  <div class="filter row">
+    <% filter_hash = params[:f] %>
+    <% location_ids = filter_hash.try(:[], :l_ids) || [] %>
+    <% city_ids = filter_hash.try(:[], :c_ids) || [] %>
+    <% region_ids = filter_hash.try(:[], :r_ids) || [] %>
+    <% filter_interested = filter_hash.try(:[], :i) %>
+    <% filter_customized = filter_hash.try(:[], :c) %>
+    <div class="col-md-12 btn-toolbar" data-turbolinks="false">
+      <% if signed_in? %>
+        <%= check_box_tag "f[i]", current_profile.id, filter_interested, class: 'filter-checkbox', id: "filter_interested" %>
+        <%= check_box_tag "f[c]", current_profile.id, filter_customized, class: 'filter-checkbox', id: "filter_interested" %>
+        <% if filter_interested %>
+          <% cls = 'interested' %>
+        <% else %>
+          <% cls = 'text-muted' %>
+        <% end %>
+        <% cls = filter_interested ? 'interested active' : 'text-muted' %>
+        <div class="btn-group">
+          <button type="submit" class="submit-filter-interested btn btn-default <%= cls %>" formaction=<%= toggle_interested_filter_events_path %>>
+            <span class="glyphicon glyphicon-heart"></span>
+            Saved Events
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <% cls = filter_customized ? 'customized active' : 'text-muted' %>
+          <button type="submit" class="submit-filter-customized btn btn-default <%= cls %>" formaction=<%= toggle_customized_filter_events_path %>>
+            <span class="glyphicon glyphicon-tasks"></span>
+            Your Custom Filter
+          </button>
+
+          <%= link_to current_profile, class: 'btn btn-default' do %>
+            <span class="glyphicon glyphicon-wrench"></span>
+            Customize
+          <% end %>
+        </div>
+      <% end %>
+
+      <%# <div class="btn-group"> %>
+      <%#   <% cls = (location_ids.any? || city_ids.any? || region_ids.any?) ? 'active' : ''  %1> %>
+      <%#   <%= link_to "#", class: "btn btn-default #{cls}", data: { toggle: 'modal', target: '#quickfilter' } do %1> %>
+      <%#     <span class="glyphicon glyphicon-filter"></span> %>
+      <%#     Quickfilter %>
+      <%#   <% end %1> %>
+      <%# </div> %>
+
+    </div>
+
+    <%# <div class="modal quickfilter-modal bs-example-modal-lg" tabindex="-1" id="quickfilter"> %>
+    <%#   <div class="modal-dialog modal-lg" role="document"> %>
+    <%#     <div class="modal-content"> %>
+    <%#       <div class="modal-header"> %>
+    <%#         <div class="row"> %>
+    <%#           <div class="col-md-4"> %>
+    <%#             <h3>Quickfilter</h3> %>
+    <%#           </div> %>
+    <%#           <div class="col-md-4"> %>
+    <%#           </div> %>
+    <%#           <div class="col-md-4"> %>
+    <%#             <div class="form-group has-feedback"> %>
+    <%#               <input type="text" class="form-control search-filter"> %>
+    <%#               <span class="glyphicon glyphicon-search form-control-feedback"></span> %>
+    <%#             </div> %>
+    <%#           </div> %>
+    <%#         </div> %>
+    <%#       </div> %>
+    <%#       <div class="modal-body"> %>
+    <%#         <div class="row"> %>
+    <%#           <div class="col-md-4" id="filter-locations"> %>
+    <%#             <div class="panel panel-default"> %>
+    <%#               <div class="panel-heading"> %>
+    <%#                 <strong>Filter Locations</strong> %>
+    <%#               </div> %>
+    <%#               <div class="panel-body"> %>
+    <%#                 <div class="list-group filter-list"> %>
+    <%#                   <% Location.all.each do |location| %1> %>
+    <%#                     <% checked = location_ids.include?(location.id.to_s) %1> %>
+    <%#                     <div class="list-group-item search-filter-item"> %>
+    <%#                       <%= check_box_tag "f[l_ids][]", location.id, checked, class: 'filter-checkbox', id: "filter_location_#{location.id}", form: :filter_form %1> %>
+    <%#                       <%= label_tag "filter_location_#{location.id}", class: 'filter-label', form: :filter_form do %1> %>
+    <%#                         <span class="glyphicon"></span> %>
+    <%#                         <%= location %1> %>
+    <%#                       <% end %1> %>
+    <%#                     </div> %>
+    <%#                   <% end %1> %>
+    <%#                 </div> %>
+    <%#               </div> %>
+    <%#             </div> %>
+    <%#           </div> %>
+    <%#           <div class="col-md-4" id="filter-cities"> %>
+    <%#             <div class="panel panel-default"> %>
+    <%#               <div class="panel-heading"> %>
+    <%#                 <strong>Filter Cities</strong> %>
+    <%#               </div> %>
+    <%#               <div class="panel-body"> %>
+    <%#                 <div class="list-group filter-list"> %>
+    <%#                   <% City.all.each do |city| %1> %>
+    <%#                     <% checked = city_ids.include?(city.id.to_s) %1> %>
+    <%#                     <div class="list-group-item search-filter-item"> %>
+    <%#                       <%= check_box_tag "f[c_ids][]", city.id, checked, class: 'filter-checkbox', id: "filter_city_#{city.id}", form: :filter_form %1> %>
+    <%#                       <%= label_tag "filter_city_#{city.id}", class: 'filter-label', form: :filter_form do %1> %>
+    <%#                         <span class="glyphicon"></span> %>
+    <%#                         <%= city %1> %>
+    <%#                       <% end %1> %>
+    <%#                     </div> %>
+    <%#                   <% end %1> %>
+    <%#                 </div> %>
+    <%#               </div> %>
+    <%#             </div> %>
+    <%#           </div> %>
+    <%#           <div class="col-md-4" id="filter-regions"> %>
+    <%#             <div class="panel panel-default"> %>
+    <%#               <div class="panel-heading"> %>
+    <%#                 <strong>Filter Regions</strong> %>
+    <%#               </div> %>
+    <%#               <div class="panel-body"> %>
+    <%#                 <div class="list-group filter-list"> %>
+    <%#                   <% Region.all.each do |region| %1> %>
+    <%#                     <% checked = region_ids.include?(region.id.to_s) %1> %>
+    <%#                     <div class="list-group-item search-filter-item"> %>
+    <%#                       <%= check_box_tag "f[r_ids][]", region.id, checked, class: 'filter-checkbox', id: "filter_region_#{region.id}", form: :filter_form %1> %>
+    <%#                       <%= label_tag "filter_region_#{region.id}", class: 'filter-label', form: :filter_form do %1> %>
+    <%#                         <span class="glyphicon"></span> %>
+    <%#                         <%= region %1> %>
+    <%#                       <% end %1> %>
+    <%#                     </div> %>
+    <%#                   <% end %1> %>
+    <%#                 </div> %>
+    <%#               </div> %>
+    <%#             </div> %>
+    <%#           </div> %>
+    <%#         </div> %>
+    <%#       </div> %>
+    <%#       <div class="modal-footer"> %>
+    <%#         <%= submit_tag "Clear Filter", class: 'btn btn-danger', form: :filter_form, formaction: clear_quickfilter_events_path %1> %>
+    <%#         <%= submit_tag "Apply Filter", class: 'btn btn-default', form: :filter_form %1> %>
+    <%#       </div> %>
+    <%#     </div> %>
+    <%#   </div> %>
+    <%# </div> %>
+  </div>
+<% end %>

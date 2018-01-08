@@ -1,5 +1,18 @@
 .filter {
-  margin-top: 25px;
+
+  .glyphicon {
+    &.all-checked:after {
+      color: $color-filtered-red;
+      content:"\e106";
+      font-family: "Glyphicons Halflings";
+    }
+
+    &.not-all-checked:after {
+      color: $color-filtered-green;
+      content:"\e105";
+      font-family: "Glyphicons Halflings";
+    }
+  }
 
   .submit-filter-interested .glyphicon {
     color: red;
@@ -37,9 +50,9 @@
   .filter-checkbox {
     & ~ .filter-label {
       & .glyphicon:after {
-        color: $brand-success;
+        color: $color-filtered-green;
         font-family: "Glyphicons Halflings";
-        content:"\e089";
+        content:"\e105";
       }
     }
 
@@ -50,7 +63,7 @@
         & .glyphicon:after {
           color: $color-filtered-red;
           font-family: "Glyphicons Halflings";
-          content:"\e090";
+          content:"\e106";
         }
       }
     }
