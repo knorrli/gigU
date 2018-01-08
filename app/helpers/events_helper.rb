@@ -13,4 +13,12 @@ module EventsHelper
       end.html_safe
     end
   end
+
+  def with_markdown_links(text)
+    text.gsub /\[([^\]]+)\]\(([^)]+)\)/, '<a target="_blank" href="\2">\1</a>'
+  end
+
+  def maybe_active(active_tab, tab_name)
+    active_tab == tab_name ? 'active' : ''
+  end
 end

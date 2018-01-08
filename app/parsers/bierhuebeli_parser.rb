@@ -31,8 +31,8 @@ class BierhuebeliParser < BaseParser
       description: parse_description(page),
       doors: parse_doors(page),
       starts_at: parse_starts_at(page),
-      ends_at: parse_ends_at(page),
       admission: parse_admission(page),
+      image_url: parse_image_url(page),
       extras: parse_extras(page)
     )
     event
@@ -51,7 +51,7 @@ class BierhuebeliParser < BaseParser
 
   def parse_subtitle(page)
     container = page.css '.bh-event-actor'
-    container.text.squish
+    html_to_string container.to_s
   end
 
   def parse_description(page)
@@ -61,23 +61,34 @@ class BierhuebeliParser < BaseParser
 
   def parse_doors(page)
     container = page.css '.bh-tuer'
-    time = container.text[/^.*(\d{2}[:|\.]\d{2}).*$/, 1].gsub(".", ":")
-    DateTime.parse(time)
+    if time = container.text[/^.*(\d{2}[:|\.]\d{2}).*$/, 1]
+      DateTime.parse(time.gsub(".", ":"))
+    else
+      nil
+    end
   end
 
   def parse_starts_at(page)
     container = page.css '.bh-beginn'
-    time = container.text[/^.*(\d{2}[:|\.]\d{2}).*$/, 1].gsub(".", ":")
-    DateTime.parse(time)
-  end
-
-  def parse_ends_at(page)
-    nil
+    if time = container.text[/^.*(\d{2}[:|\.]\d{2}).*$/, 1]
+      DateTime.parse(time.gsub(".", ":"))
+    else
+      nil
+    end
   end
 
   def parse_admission(page)
     container = page.css '.bh-abendkasse'
-    price = container.text[/(CHF.*)/, 1].squish
+    if price = container.text[/(CHF.*)/, 1]
+      price.squish
+    else
+      nil
+    end
+  end
+
+  def parse_image_url(page)
+    container = page.css '.attachment-post-thumbnail'
+    container.first['src']
   end
 
   def parse_extras(page)

@@ -6,5 +6,6 @@ class AddMoreOptionalAttributesToEvent < ActiveRecord::Migration[5.1]
     add_column :events, :admission, :string
     add_column :events, :extras, :text
     add_column :events, :doors, :datetime
+    add_column :events, :image_url, :string
   end
 end

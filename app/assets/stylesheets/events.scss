@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .events {
+
   .interest-link {
     & .glyphicon:after {
       font-family: "Glyphicons Halflings";
@@ -22,27 +23,8 @@
       }
     }
   }
+}
 
-  .filter-checkbox {
-
-    & ~ .filter-label {
-      & .glyphicon:after {
-        color: $brand-success;
-        font-family: "Glyphicons Halflings";
-        content:"\e089";
-      }
-    }
-
-    &:checked {
-      & ~ .filter-label {
-        color: $gray-light;
-
-        & .glyphicon:after {
-          color: $gray;
-          font-family: "Glyphicons Halflings";
-          content:"\e090";
-        }
-      }
-    }
-  }
+.event {
+  margin-top: 40px;
 }

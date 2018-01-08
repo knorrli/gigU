@@ -1,17 +1,18 @@
 $(function() {
   $(document).on('turbolinks:load', function() {
+    console.log('init')
     $(".filter").on('keyup', ".search-filter", filterResults)
     $(document).on('keyup', '.search-events', filterEvents)
+    window.searchFilterItems = $(document).find(".search-filter-item")
+    window.searchFilterEvents = $(document).find(".event-item")
   })
 
-  var searchFilterItems = $(".filter").find(".search-filter-item")
-  var searchFilterEvents = $(".event")
 
   var filterResults = function(e) {
     var search = $(this);
     var value = search.val().toLowerCase();
 
-    searchFilterItems.each(function(i, item) {
+    window.searchFilterItems.each(function(i, item) {
       var labelContent = $(item).text().toLowerCase()
       if (!labelContent.includes(value)) {
         $(item).addClass('hidden')
@@ -22,10 +23,11 @@ $(function() {
   }
 
   var filterEvents = function(e) {
+    console.log("filtering...")
     var search = $(this);
     var value = search.val().toLowerCase();
 
-    searchFilterEvents.each(function(i, item) {
+    window.searchFilterEvents.each(function(i, item) {
       var item = $(item)
       var eventContent = item.text().toLowerCase()
       var panel = $(item.closest('.panel'))

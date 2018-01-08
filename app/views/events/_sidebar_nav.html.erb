@@ -1,0 +1,14 @@
+<ul class="nav nav-pills nav-stacked">
+  <% if signed_in? && current_profile.events.any? %>
+    <li class=<%= maybe_active(active, 'saved-events') %>>
+      <%= link_to saved_events_path do %>
+        <span class="glyphicon glyphicon-heart"></span>
+        Saved Events
+      <% end %>
+    </li>
+    <% end %>
+    <li class=<%= maybe_active(active, 'all-events') %>>
+      <%= link_to "All Events", events_path %>
+    </li>
+</ul>
+

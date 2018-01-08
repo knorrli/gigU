@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180105063306) do
     t.string "admission"
     t.text "extras"
     t.datetime "doors"
+    t.string "image_url"
     t.index ["location_id"], name: "index_events_on_location_id"
   end
 

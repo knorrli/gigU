@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :event_interests, path: '/my_events', only: [:index, :create, :destroy]
   resources :events, only: [:index, :show] do
     collection do
+      get :saved
       get :toggle_customized_filter
       get :toggle_interested_filter
       get :toggle_location_filter

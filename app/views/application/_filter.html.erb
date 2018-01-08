@@ -9,7 +9,7 @@
     <div class="col-md-1">
       <h4>Filters:</h4>
     </div>
-    <div class="col-md-7 btn-toolbar" data-turbolinks="false">
+    <div class="col-md-8 btn-toolbar" data-turbolinks="false">
       <% if signed_in? %>
         <%= check_box_tag "f[i]", current_profile.id, filter_interested, class: 'filter-checkbox', id: "filter_interested" %>
         <%= check_box_tag "f[c]", current_profile.id, filter_customized, class: 'filter-checkbox', id: "filter_interested" %>
@@ -29,6 +29,7 @@
         <div class="btn-group">
           <% cls = filter_customized ? 'customized active' : 'text-muted' %>
           <button type="submit" class="submit-filter-customized btn btn-default <%= cls %>" formaction=<%= toggle_customized_filter_events_path %>>
+            <span class="glyphicon glyphicon-tasks"></span>
             Your Custom Filter
           </button>
 
@@ -49,7 +50,7 @@
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render 'search' %>
     </div>
 

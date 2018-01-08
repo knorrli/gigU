@@ -23,7 +23,7 @@ class BaseParser
   end
 
   def html_to_string(html)
-    Html2Text.convert(html)
+    Html2Text.convert(html).strip
   end
 
   def name
