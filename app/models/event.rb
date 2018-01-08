@@ -10,11 +10,13 @@
 #  updated_at  :datetime         not null
 #  description :string
 #  url         :string
+#  subtitle    :string
 #  starts_at   :datetime
 #  ends_at     :datetime
 #  admission   :string
 #  extras      :text
 #  doors       :datetime
+#  image_url   :string
 #
 
 class Event < ApplicationRecord
