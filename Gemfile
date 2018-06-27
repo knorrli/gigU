@@ -40,7 +40,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'pry-rails'
 
 # webscraping/XPath parsing
-gem 'nokogiri ~> 1.8.2'
+gem 'nokogiri', '~> 1.8.2'
 
 # text parsing
 gem 'html2text', '~> 0.2.0'
