@@ -14,9 +14,9 @@ After installing the necessary stuff, run `bundle install` again to install the 
 
 Now you should be set to run the app:
 
-1. Create and migrate the DB: `bundle exec rake db:setup
-2. Seed dummy values into the DB for manual testing
-3. Start the server and run the app: `bundle exec rails s`, `open localhost:3000`
+1. Create and migrate the DB: `bundle exec rake db:setup`
+2. Seed dummy values into the DB for manual testing: `bundle exec rake db:seed`
+3. Start the server and run the app: `bundle exec rails s`, [http://localhost:3000](http://localhost:3000)
 
 
 At this point, you should see different locations, however there are no Events yet!
