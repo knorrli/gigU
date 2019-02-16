@@ -5,6 +5,9 @@ class EventCollector
   end
 
   def run
-    BaseParser.descendants.each { |parser| parser.send :parse }
+    BaseParser.descendants.each do |parser| 
+      next if %w(ISCParser SchuurParser).include? parser.name
+      parser.send :parse
+    end
   end
 end
